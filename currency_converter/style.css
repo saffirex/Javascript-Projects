@@ -1,0 +1,330 @@
+:root {
+  /* --clr-1: #416788;
+    --clr-2: #efefef;
+    --clr-3: #63a46c; */
+
+  --clr-1: #242423;
+  --clr-2: #e8eddf;
+  --clr-3: #f5cb5c;
+  --clr-4: #BB4430;
+
+  --clr-skeleton1: #e8eddf;
+  --clr-skeleton2: #C2C8C5;
+  --fw-head: 300;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap");
+
+* {
+  font-family: "Comfortaa", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: var(--fw-head);
+  font-style: normal;
+
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--clr-3);
+}
+
+main {
+  background: var(--clr-2);
+  padding: 3.5rem;
+  width: 90%;
+  max-width: 60rem;
+  border-radius: 1rem;
+  display: grid;
+  gap: 40px;
+  box-shadow: 5px 5px 10px -7px;
+
+  overflow: hidden;
+  position: relative;
+  /* for drawer */
+}
+
+h1 {
+  text-align: center;
+  font-weight: 600;
+  font-size: 2rem;
+  color: var(--clr-1);
+  text-transform: uppercase;
+}
+
+button {
+  background: transparent;
+  border: none;
+  color: var(--clr-1);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+#controls {
+  display: grid;
+  gap: 40px;
+  position: relative;
+}
+
+.control {
+  display: flex;
+  box-shadow: inset 0 0 5px var(--clr-skeleton2);
+  border-radius: 5px;
+  border-color: var(--clr-skeleton2);
+  overflow: hidden;
+  gap: 10px;
+}
+
+.control button {
+  --image: none;
+  font-weight: 600;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-items: center;
+  color: var(--clr-1);
+}
+
+.control input {
+  font-size: 2.5rem;
+  text-align: end;
+  background: transparent;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  color: var(--clr-1);
+}
+
+.control input::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+.control button::before {
+  content: "\e734";
+  font-family: "Material Symbols Outlined";
+  font-size: 1.4rem;
+  font-weight: 200;
+  color: var(--clr-2);
+  background-color: var(--clr-4);
+  /* background-image: url(./assets/universal_currency.svg); */
+
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* or make line height equal to the height of the background(circle) */
+  /* line-height: 2rem; */
+}
+
+/* change the background of icon to country flag */
+/* this class will be added by javascript */
+.currency-chosen button::before {
+  content: "";
+  font-size: 1.4rem;
+  font-weight: 200;
+  color: var(--clr-4);
+
+  background-image: var(--image);
+  background-size: cover;
+  background-position: center;
+
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.control button::after {
+  content: "\e5cf";
+  font-family: "Material Symbols Outlined";
+  font-size: 2rem;
+  font-weight: 200;
+  color: var(--clr-1);
+
+  width: 3rem;
+  height: 2rem;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* or make line height equal to the height of the background(circle) */
+  /* line-height: 2rem; */
+}
+
+.control button:hover::after {
+  color: var(--clr-4)
+}
+
+.control button:hover {
+  color: var(--clr-4);
+  text-shadow: 1px 1px 60px var(--clr-4);
+}
+
+#swap-btn {
+  height: 4rem;
+  width: 4rem;
+  background-color: var(--clr-1);
+  color: var(--clr-2);
+  border-radius: 50%;
+  box-shadow: 1px 1px 20px -2px gray;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#swap-btn:hover {
+  background: var(--clr-4);
+}
+
+#swap-btn span {
+  line-height: 4rem;
+  font-size: 2rem;
+  transition: 0.5s;
+}
+
+#swap-btn:hover span {
+  rotate: 360deg;
+  transition: 0.5s;
+}
+
+.exchange-rate,
+.exchange-rate h5 {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: var(--clr-1);
+}
+
+#exchange-rate-text {
+  display: inline-block;
+  font-weight: inherit;
+  color: var(--clr-4);
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+/* when empty, give it some height and width to show skeleton */
+.exchange-rate span:empty {
+  min-height: 1rem;
+  min-width: 15rem;
+}
+
+.drawer {
+  position: absolute;
+  background: var(--clr-2);
+  inset: 0;
+  /* covers the entire relative parent */
+  padding: 1.5rem;
+  display: grid;
+  align-content: start;
+  gap: 2rem;
+
+  transform: translateY(100%);
+  transition: transform 1s cubic-bezier(0.175, 0.885, 0.18, 1);
+}
+
+/* document.getElementById("drawer").toggleAttribute("toggled-visible") */
+.drawer[toggled-visible] {
+  transform: none;
+}
+
+.drawer-title {
+  text-align: center;
+  position: relative;
+}
+
+.drawer-title h3 {
+  font-weight: 700;
+}
+
+.drawer-title button {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+  background: transparent;
+  opacity: 0.7;
+  font-size: 1.1rem;
+}
+
+.drawer-title button:hover {
+  opacity: 1;
+}
+
+.drawer-search input {
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  border-radius: 0.5rem;
+  border: 1px solid var(--clr-skeleton2);
+  color: var(--clr-1);
+
+  background-color: var(--clr-2);
+  outline-color: var(--clr-3);
+}
+
+.currency-list {
+  overflow-y: auto;
+  color: var(--clr-1);
+}
+
+.currency-list li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding-block: 0.5rem;
+}
+
+.currency-list li h4{
+    font-weight: 600;
+}
+
+.currency-list li:first-child {
+  padding-block-start: 0;
+}
+
+/* disable pointer events for all non-,<li> items */
+.currency-list *:not(li) {
+  pointer-events: none;
+}
+
+.skeleton {
+  position: relative;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute; /*relative wala ko mathi rakhna */
+  inset: 0; /*cover relative wala element entirely */
+  z-index: 1;
+  background: var(--clr-skeleton1);
+  border-radius: 1rem;
+  animation: loading 0.3s linear infinite alternate;
+}
+
+@keyframes loading {
+  0% {
+    background: var(--clr-skeleton1);
+  }
+
+  100% {
+    background: var(--clr-skeleton2);
+  }
+}
